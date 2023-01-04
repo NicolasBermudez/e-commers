@@ -3,6 +3,7 @@ import axios from 'axios'
 import getConfig from '../../utils/getConfig'
 import { useDispatch } from 'react-redux'
 import { getUserCart } from '../../store/slices/cart.slice'
+import './style/cartProduct.css'
 
 const CartProduct = ({ product }) => {
 
@@ -17,21 +18,24 @@ const CartProduct = ({ product }) => {
       })
       .catch(err => console.log(err))
   }
-
+  console.log(product)
 
   return (
-    <article className='card-product'>
-      <header>
+    <article className='cart-product'>
+      <header className='cart-product__header'>
         <h4>{product.brand}</h4>
         <h3>{product.title}</h3>
       </header>
-      <button onClick={handleDelete} >
-        <i className="fa-solid fa-trash-can-arrow-up"></i>
+      <button className='cart-product__btn' onClick={handleDelete} >
+        <i className="fa-solid fa-trash-can-arrow-up btn__icon"></i>
       </button>
-      <div>{product.productsInCart.quantity}</div>
-      <div>
+      <div className='cart-product__quantity'>
+        <p>Quantity:</p>
+        <span className='cart-product__productsInCart'>{product.productsInCart.quantity}</span>
+      </div>
+      <div className='cart-product__price'>
         <p>Unit Price:</p>
-        <span>{product.price}</span>
+        <span>&#36;{product.price}</span>
       </div>
     </article>
   )

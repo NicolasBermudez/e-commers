@@ -1,15 +1,15 @@
 import axios from 'axios'
 import React from 'react'
-import getConfig from '../../utils/getConfig'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUserCart } from '../../store/slices/cart.slice'
-import { useDispatch } from 'react-redux'
-
-
+import getConfig from '../../utils/getConfig'
+import './style/cardProduct.css'
 
 const CardProduct = ({ product }) => {
 
   const navigate = useNavigate()
+
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -18,9 +18,7 @@ const CardProduct = ({ product }) => {
 
   const handleBtnClick = e => {
     e.stopPropagation()
-
     const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'
-
     const data = {
       id: product.id,
       quantity: 1
@@ -31,24 +29,26 @@ const CardProduct = ({ product }) => {
         console.log(res.data)
         dispatch(getUserCart())
       })
-      .catch(err => console.log(err))
+      .then(err => console.log(err))
   }
 
   return (
-    <article onClick={handleClick}>
-      <header>
-        <img src={product.productImgs[0]} alt="" />
+    <article className='product' onClick={handleClick}>
+      <header className='product__header'>
+        <img className='product__img' src={product.productImgs[0]} alt="" />
+        <img className='product__img' src={product.productImgs[1]} alt="" />
       </header>
-      <section>
-        <h3>{product.title}</h3>
-        <article>
-          <span>Price</span>
-          <h4>{product.price}</h4>
+      <section className='product__body'>
+        <h3 className='product__name'>{product.title}</h3>
+        <article className='product__price-container'>
+          <span className='product__price'>Price</span>
+          <h4 className='product__price-number'>{product.price}</h4>
         </article>
-        <button><i className="fa-solid fa-cart-arrow-down" onClick={handleBtnClick} ></i></button>
+        <button onClick={handleBtnClick} className='product__btn'>
+          <i className="fa-solid fa-cart-plus"></i>
+        </button>
       </section>
     </article>
   )
 }
-
 export default CardProduct

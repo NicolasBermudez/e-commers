@@ -40,12 +40,12 @@ const ProductDescription = ({ product }) => {
   }
 
   return (
-    <article>
+    <article className='pro'>
       <h2>{product?.title}</h2>
       <p>{product?.description}</p>
       <section>
-        <span>Price</span>
-        <h3>{product?.price}</h3>
+        <span>Precio:</span>
+        <h3>&#36;{product?.price}</h3>
       </section>
       <section>
         <h3>Quantity</h3>

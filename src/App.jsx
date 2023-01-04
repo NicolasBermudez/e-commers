@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
@@ -10,8 +9,17 @@ import Header from './components/shared/Header'
 import { getUserCart } from './store/slices/cart.slice'
 import { getAllProducts } from './store/slices/products.slice'
 import Cart from './pages/Cart'
+import Footer from './components/shared/Footer'
 
 function App() {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(false)
+    setTimeout(() =>
+      setLoading(true), [2000])
+  }, [])
 
   const dispatch = useDispatch()
 
@@ -41,14 +49,16 @@ function App() {
 
   return (
     <div className="App">
+      <div className={`App__loading ${loading && 'App__loadin-close'}`}  ></div>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductInfo />} />
-        <Route path='/login/' element={<Login />} />
+        <Route className='login' path='/login/' element={<Login />} />
         <Route path='/cart/' element={<Cart />} />
 
       </Routes>
+      <Footer className='footer' />
     </div>
   )
 }
