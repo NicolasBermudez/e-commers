@@ -14,18 +14,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  margin-top: 10px;
-  height: 2.8rem;
   width: 50%;
+  height: 2.8rem;
   max-width: 600px;
-  background-color: #FFF;
+  margin-top: 10px;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
 .section__total-price {
   margin-left: 4px;
 }
-
 
 .cart__section {
   display: flex;
@@ -35,13 +34,13 @@
 }
 
 .section__btn {
-  border-radius: 8px;
-  margin-top: 10px;
-  height: 1.7rem;
   width: 50%;
+  height: 1.7rem;
   max-width: 600px;
-  background-color: #A52A2A;
-  color: #FFF;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #E41F1F;
   transition: 0.2s ease;
 }
 
@@ -49,15 +48,8 @@
   transform: scale(1.2);
 }
 
-
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .cart__cartProduct {
     grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-@media (min-width: 600px) and (max-width: 900px) {
-  .cart__cartProduct {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

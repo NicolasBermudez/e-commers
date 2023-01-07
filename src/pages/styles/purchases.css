@@ -1,0 +1,19 @@
+.myPurchases {
+  display: grid;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.myPurchases__title {
+  margin: auto;
+  text-align: center;
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 5px;
+  width: 200px;
+}
+
+.myPurchases__card {
+  margin: 10px;
+}

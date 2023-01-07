@@ -2,10 +2,21 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllProducts, getProductsByCategory } from '../../store/slices/products.slice'
+import './style/filterCategories.css'
 
-const FilterCategory = () => {
+const FilterCategory = ({ setInputValue }) => {
 
   const [categories, setCategories] = useState()
+
+  const [handleOpen, setHandleOpen] = useState(true)
+
+  const hadleOpen = e => {
+    if (handleOpen) {
+      setHandleOpen(false)
+    } else {
+      setHandleOpen(true)
+    }
+  }
 
   useEffect(() => {
 
@@ -21,22 +32,26 @@ const FilterCategory = () => {
 
   const handleClick = id => {
     dispatch(getProductsByCategory(id))
+    setInputValue("")
   }
 
   const handleAllProducts = () => {
     dispatch(getAllProducts())
+    setInputValue("")
   }
 
 
 
   return (
-    <section>
-      <h3>Categories</h3>
-      <ul>
-        <li onClick={() => handleClick(handleAllProducts)} >All Products</li>
+    <section className='section__categories' >
+      <h3 className='categories__h3' >Categories
+        <button className='categories__btn' onClick={hadleOpen}><i className="fa-solid fa-arrow-down-up-across-line"></i></button>
+      </h3>
+      <ul className={`categories__ul-open ${handleOpen && 'categories__ul-close'}`}>
+        <li className='categories__btn-all' onClick={handleAllProducts}>All Products</li>
         {
           categories?.map(category => (
-            <li onClick={() => handleClick(category.id)} key={category.id}>{category.name}</li>
+            <li className='categories__btn-id' onClick={() => handleClick(category.id)} key={category.id}>{category.name}</li>
           ))
         }
       </ul>

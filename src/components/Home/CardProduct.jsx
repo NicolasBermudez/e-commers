@@ -1,12 +1,14 @@
 import axios from 'axios'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUserCart } from '../../store/slices/cart.slice'
 import getConfig from '../../utils/getConfig'
 import './style/cardProduct.css'
 
 const CardProduct = ({ product }) => {
+
+  const cart = useSelector(state => state.cart)
 
   const navigate = useNavigate()
 
@@ -29,8 +31,26 @@ const CardProduct = ({ product }) => {
         console.log(res.data)
         dispatch(getUserCart())
       })
-      .then(err => console.log(err))
+      .catch(err => {
+        if (err.response.status === 400) {
+          //update
+          const URLPatch = 'https://e-commerce-api.academlo.tech/api/v1/cart'
+          const prevQuantity = cart.filter(e => e.id === product.id)[0].productsInCart.quantity
+          const data = {
+            id: product.id,
+            newQuantity: prevQuantity + 1
+          }
+          axios.patch(URLPatch, data, getConfig())
+            .then(res => {
+              console.log(res.data)
+              dispatch(getUserCart())
+            })
+            .catch(err => console.log(err))
+        }
+
+      })
   }
+
 
   return (
     <article className='product' onClick={handleClick}>

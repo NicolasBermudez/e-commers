@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CardProduct from '../components/Home/CardProduct'
-import ProductDescription from '../components/ProductInfo/ProductDescription'
+import ProductDescription from '../components/productInfo/ProductDescription'
+import SliderImg from '../components/productInfo/SliderImg'
+import './styles/productInfo.css'
 
 const ProductInfo = () => {
 
@@ -29,19 +31,19 @@ const ProductInfo = () => {
     }
   }, [allProducts, product])
 
-  console.log(similarProducts)
 
   return (
-    <div>
-      <ProductDescription product={product} />
-      <section>
-        <h2>Discover similar items</h2>
-        <div className='similar-products-container'>
+    <div className='productInfo'>
+      <SliderImg className='productInfo__sliderImg' listImgs={product?.productImgs} />
+      <ProductDescription className='productInfo__productDescription' product={product} />
+      <section className='productInfo__section'>
+        <h2 className='productInfo__h2'>Discover similar items</h2>
+        <div className='productInfo__similar-products-container'>
           {
             similarProducts?.map(simProd => {
               if (simProd.title !== product.title) {
                 return (
-                  <CardProduct
+                  <CardProduct className='productInfo__cardProduct'
                     key={simProd.id}
                     product={simProd}
                   />

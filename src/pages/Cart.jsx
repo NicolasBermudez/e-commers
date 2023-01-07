@@ -1,10 +1,23 @@
-import axios from 'axios'
-import React from 'react'
+// Import React
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+// Import axios for API Rest
+import axios from 'axios'
+
+// Import Components
 import CartProduct from '../components/Cart/CartProduct'
+
+// Import Slices
 import { getUserCart } from '../store/slices/cart.slice'
+
+// Import Utilities
 import getConfig from '../utils/getConfig'
+
+// Import Css
 import './styles/cart.css'
+
+// Shopping Cart 
 
 const Cart = () => {
 
@@ -30,7 +43,9 @@ const Cart = () => {
       .catch(err => console.log(err))
   }
 
-
+  useEffect(() => {
+    dispatch(getUserCart())
+  }, [])
 
   return (
     <section className='cart'>
