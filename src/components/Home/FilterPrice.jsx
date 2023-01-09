@@ -1,10 +1,13 @@
 import React from 'react'
 import './style/filterPrice.css'
 
-const FilterPrice = ({ setInputPrice }) => {
+const FilterPrice = ({ setInputPrice, setHandleOpening, handleOpenig }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    setHandleOpening(handleOpenig = false)
+
     const inputFrom = e.target.from.value
 
     const inputTo = e.target.to.value

@@ -7,7 +7,7 @@ import './styles/purchases.css'
 
 
 
-const Purchases = () => {
+const Purchases = ({ setVisualFilter, visualFilter }) => {
 
   const [purchasesList, setPurchasesList] = useState()
 
@@ -19,6 +19,9 @@ const Purchases = () => {
       .catch(err => console.log(err))
   }, [])
 
+  useEffect(() => {
+    setVisualFilter(visualFilter = false)
+  }, [])
 
 
   return (

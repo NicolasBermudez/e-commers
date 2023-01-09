@@ -3,7 +3,7 @@ import './style/header.css'
 
 
 
-const Header = ({ setHandleOpening, handleOpening }) => {
+const Header = ({ setHandleOpening, handleOpening, visualFilter }) => {
 
   const handleClick = () => {
     setHandleOpening(!handleOpening)
@@ -20,7 +20,11 @@ const Header = ({ setHandleOpening, handleOpening }) => {
           <li className='header__item'><Link to='/login'><i className="fa-regular fa-user header__icon" ></i></Link></li>
           <li className='header__item'><Link to='/cart'><i className="fa-solid fa-cart-plus header__icon" ></i></Link></li>
           <li className='header__item'><Link to='/purchases'><i className="fa-solid fa-money-check-dollar header__icon"></i></Link></li>
-          <li className='header__item'><button onClick={handleClick} className='header__btn'><i className="fa-solid fa-filter header__icon"></i></button></li>
+          {
+            visualFilter ?
+              <li className='header__item'><button onClick={handleClick} className='header__btn'><i className="fa-solid fa-filter header__icon"></i></button></li>
+              : ""
+          }
         </ul>
       </nav>
     </header >

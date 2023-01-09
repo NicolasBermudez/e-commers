@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { getUserCart } from '../../store/slices/cart.slice'
 import getConfig from '../../utils/getConfig'
 import './styles/productDescription.css'
@@ -14,6 +15,8 @@ const ProductDescription = ({ product }) => {
   const dispatch = useDispatch()
 
   const [counter, setCounter] = useState(1)
+
+  const navigate = useNavigate()
 
   const handleMinus = () => {
     if (counter - 1 > 0) {
@@ -52,20 +55,22 @@ const ProductDescription = ({ product }) => {
             .then(res => {
               console.log(res.data)
               dispatch(getUserCart())
+              navigate(`/Cart`)
             })
             .catch(err => console.log(err))
+        } else if (err.response.status === 401) {
+          navigate('/Login')
         }
       })
   }
 
-  console.log(product)
   return (
     <article className='products'>
       <h2 className='products__title'>{product?.title}</h2>
       <p className='products__description' >{product?.description}</p>
       <section className='products__section-price' >
         <span className='products__price-title'>Price:</span>
-        <h3 className='products__price-h3'>&#36;{product?.price}</h3>
+        <h3 className='products__price-h3'>&#36;{product?.price * counter}</h3>
       </section>
       <section className='products__section-quantity' >
         <h3 className='products__quantity-h3'>Quantity</h3>

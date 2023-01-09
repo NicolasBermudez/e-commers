@@ -30,6 +30,7 @@ const CardProduct = ({ product }) => {
       .then(res => {
         console.log(res.data)
         dispatch(getUserCart())
+        navigate(`/Cart`)
       })
       .catch(err => {
         if (err.response.status === 400) {
@@ -44,8 +45,11 @@ const CardProduct = ({ product }) => {
             .then(res => {
               console.log(res.data)
               dispatch(getUserCart())
+              navigate(`/Cart`)
             })
             .catch(err => console.log(err))
+        } else if (err.response.status === 401) {
+          navigate(`/Login`)
         }
 
       })

@@ -8,16 +8,18 @@ import './style/toOrderProduct.css'
 
 // Filter Ascendent and Descendent Order Products
 
-const ToOrderProducts = () => {
+const ToOrderProducts = ({ setHandleOpening, handleOpening }) => {
 
   const dispatch = useDispatch()
 
   const handleAscending = () => {
     dispatch(ascendingOrderProducts())
+    setHandleOpening(handleOpening = false)
   }
 
   const handleDescending = () => {
     dispatch(descendingOrderProducts())
+    setHandleOpening(handleOpening = false)
   }
 
   return (

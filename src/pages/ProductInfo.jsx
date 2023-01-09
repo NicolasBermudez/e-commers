@@ -7,7 +7,7 @@ import ProductDescription from '../components/productInfo/ProductDescription'
 import SliderImg from '../components/productInfo/SliderImg'
 import './styles/productInfo.css'
 
-const ProductInfo = () => {
+const ProductInfo = ({ setVisualFilter, visualFilter }) => {
 
   const { id } = useParams()
 
@@ -31,6 +31,9 @@ const ProductInfo = () => {
     }
   }, [allProducts, product])
 
+  useEffect(() => {
+    setVisualFilter(visualFilter = false)
+  }, [])
 
   return (
     <div className='productInfo'>

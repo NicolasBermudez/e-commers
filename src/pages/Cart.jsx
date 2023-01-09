@@ -1,6 +1,7 @@
 // Import React
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // Import axios for API Rest
 import axios from 'axios'
@@ -19,11 +20,13 @@ import './styles/cart.css'
 
 // Shopping Cart 
 
-const Cart = () => {
+const Cart = ({ setVisualFilter, visualFilter }) => {
 
   const dispatch = useDispatch()
 
   const cartProducts = useSelector(state => state.cart)
+
+  const navigate = useNavigate()
 
   const handleCheckOut = () => {
     const URL = 'https://e-commerce-api.academlo.tech/api/v1/purchases'
@@ -45,7 +48,12 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getUserCart())
+    setVisualFilter(visualFilter = false)
   }, [])
+
+  const handleCheckContinue = () => {
+    navigate(`/`)
+  }
 
   return (
     <section className='cart'>
@@ -69,6 +77,7 @@ const Cart = () => {
           }</p>
         </span>
         <button className='section__btn' onClick={handleCheckOut} >CheckOut</button>
+        <button className='section__btn' onClick={handleCheckContinue} >Continue buying</button>
       </section>
     </section>
   )

@@ -8,6 +8,7 @@
   transition: transform 20ms ease;
   margin: auto;
   margin-bottom: 10px;
+  transition: 300ms ease;
 }
 
 .product:hover {

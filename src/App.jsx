@@ -30,6 +30,8 @@ function App() {
 
   const [handleOpening, setHandleOpening] = useState(false)
 
+  const [visualFilter, setVisualFilter] = useState(false)
+
   useEffect(() => {
     setLoading(false)
     setTimeout(() =>
@@ -65,15 +67,26 @@ function App() {
   return (
     <div className="App">
       <div className={`App__loading ${loading && 'App__loadin-close'}`}  ></div>
-      <Header setHandleOpening={setHandleOpening} handleOpening={handleOpening} />
+      <Header
+        setHandleOpening={setHandleOpening}
+        handleOpening={handleOpening}
+        visualFilter={visualFilter}
+      />
       <div className='routes'>
         <Routes >
-          <Route path='/' element={<Home handleOpening={handleOpening} />} />
-          <Route path='/product/:id' element={<ProductInfo />} />
-          <Route className='login' path='/login/' element={<Login />} />
+          <Route path='/'
+            element={
+              <Home
+                setHandleOpening={setHandleOpening}
+                handleOpening={handleOpening}
+                setVisualFilter={setVisualFilter}
+                visualFilter={visualFilter}
+              />} />
+          <Route path='/product/:id' element={<ProductInfo setVisualFilter={setVisualFilter} visualFilter={visualFilter} />} />
+          <Route className='login' path='/login/' element={<Login setVisualFilter={setVisualFilter} visualFilter={visualFilter} />} />
           <Route element={<ProtectedRoutes />}>
-            <Route path='/cart/' element={<Cart />} />
-            <Route path='/purchases' element={<Purchases />} />
+            <Route path='/cart/' element={<Cart setVisualFilter={setVisualFilter} visualFilter={visualFilter} />} />
+            <Route path='/purchases' element={<Purchases setVisualFilter={setVisualFilter} visualFilter={visualFilter} />} />
           </Route>
         </Routes>
       </div>

@@ -14,7 +14,7 @@ import './styles/home.css'
 
 // Principal Page to E-commers
 
-const Home = ({ handleOpening }) => {
+const Home = ({ setHandleOpening, handleOpening, setVisualFilter, visualFilter }) => {
 
   const [productsFilter, setProductsFilter] = useState()
 
@@ -31,6 +31,7 @@ const Home = ({ handleOpening }) => {
   useEffect(() => {
     if (products) {
       setProductsFilter(products)
+      setVisualFilter(visualFilter = true)
     }
   }, [products])
 
@@ -53,9 +54,9 @@ const Home = ({ handleOpening }) => {
       <input className='search' value={inputValue} onChange={handleChange} type="text"
         placeholder='Search' />
       <section className={`filter__container ${handleOpening ? 'filter__open' : ''}`}>
-        <FilterPrice className='search__price' setInputPrice={setInputPrice} />
-        <FilterCategory setInputValue={setInputValue} className='search__catedories' />
-        <ToOrderProducts className='orderProducts' />
+        <FilterPrice className='search__price' setInputPrice={setInputPrice} setHandleOpening={setHandleOpening} handleOpening={handleOpening} />
+        <FilterCategory setInputValue={setInputValue} setHandleOpening={setHandleOpening} handleOpening={handleOpening} className='search__catedories' />
+        <ToOrderProducts className='orderProducts' setHandleOpening={setHandleOpening} handleOpening={handleOpening} />
       </section>
       <div className='products-container'>
         {

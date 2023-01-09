@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { getAllProducts, getProductsByCategory } from '../../store/slices/products.slice'
 import './style/filterCategories.css'
 
-const FilterCategory = ({ setInputValue }) => {
+const FilterCategory = ({ setInputValue, handleOpening, setHandleOpening }) => {
 
   const [categories, setCategories] = useState()
 
@@ -33,11 +33,15 @@ const FilterCategory = ({ setInputValue }) => {
   const handleClick = id => {
     dispatch(getProductsByCategory(id))
     setInputValue("")
+    setHandleOpening(handleOpening = false)
+
   }
 
   const handleAllProducts = () => {
     dispatch(getAllProducts())
     setInputValue("")
+    setHandleOpening(handleOpening = false)
+
   }
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import getConfig from '../../utils/getConfig'
 import { useDispatch } from 'react-redux'
@@ -18,7 +18,6 @@ const CartProduct = ({ product }) => {
       })
       .catch(err => console.log(err))
   }
-  console.log(product)
 
   return (
     <article className='cart-product'>
