@@ -2,7 +2,7 @@
   display: grid;
   flex-direction: row;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 .myPurchases__title {

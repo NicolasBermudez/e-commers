@@ -57,7 +57,6 @@ const Cart = ({ setVisualFilter, visualFilter }) => {
 
   return (
     <section className='cart'>
-      {/* <h2 className='cart__h2'>Cart</h2> */}
       <div className='cart__cartProduct'>
         {
           cartProducts?.map(product => (
