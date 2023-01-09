@@ -58,6 +58,7 @@ const CardProduct = ({ product }) => {
 
   return (
     <article className='product' onClick={handleClick}>
+
       <header className='product__header'>
         <img className='product__img' src={product.productImgs[0]} alt="" />
         <img className='product__img' src={product.productImgs[1]} alt="" />

@@ -1,12 +1,13 @@
 // Import React
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Import Components
 import CardProduct from '../components/Home/CardProduct'
 import FilterCategory from '../components/Home/FilterCategory'
 import FilterPrice from '../components/Home/FilterPrice'
 import ToOrderProducts from '../components/Home/ToOrderProducts'
+import { getAllProducts } from '../store/slices/products.slice'
 
 
 // Import Css
@@ -16,7 +17,11 @@ import './styles/home.css'
 
 const Home = ({ setHandleOpening, handleOpening, setVisualFilter, visualFilter }) => {
 
+  const dispatch = useDispatch()
+
   const [productsFilter, setProductsFilter] = useState()
+
+  const [showClearFilter, setShowClearFilter] = useState(false)
 
   const products = useSelector(state => state.products)
 
@@ -46,6 +51,15 @@ const Home = ({ setHandleOpening, handleOpening, setVisualFilter, visualFilter }
 
   }
 
+  const clearFilter = () => {
+    dispatch(getAllProducts())
+    setInputPrice({
+      from: 0,
+      to: Infinity
+    })
+    setShowClearFilter(!showClearFilter)
+  }
+
   const filterCallBack = prod => +prod.price >= inputPrice.from && +prod.price <= inputPrice.to
 
   // Render
@@ -53,10 +67,31 @@ const Home = ({ setHandleOpening, handleOpening, setVisualFilter, visualFilter }
     <div className='body'>
       <input className='search' value={inputValue} onChange={handleChange} type="text"
         placeholder='Search' />
+      {showClearFilter ? <button className='filter__clearBnt' onClick={clearFilter}>ClearFilter</button> : ""}
       <section className={`filter__container ${handleOpening ? 'filter__open' : ''}`}>
-        <FilterPrice className='search__price' setInputPrice={setInputPrice} setHandleOpening={setHandleOpening} handleOpening={handleOpening} />
-        <FilterCategory setInputValue={setInputValue} setHandleOpening={setHandleOpening} handleOpening={handleOpening} className='search__catedories' />
-        <ToOrderProducts className='orderProducts' setHandleOpening={setHandleOpening} handleOpening={handleOpening} />
+        <FilterPrice
+          className='search__price'
+          setInputPrice={setInputPrice}
+          setHandleOpening={setHandleOpening}
+          handleOpening={handleOpening}
+          setShowClearFilter={setShowClearFilter}
+          showClearFilter={showClearFilter}
+        />
+        <FilterCategory
+          className='search__catedories'
+          setInputValue={setInputValue}
+          setHandleOpening={setHandleOpening}
+          handleOpening={handleOpening}
+          setShowClearFilter={setShowClearFilter}
+          showClearFilter={showClearFilter}
+        />
+        <ToOrderProducts
+          className='orderProducts'
+          setHandleOpening={setHandleOpening}
+          handleOpening={handleOpening}
+          setShowClearFilter={setShowClearFilter}
+          showClearFilter={showClearFilter}
+        />
       </section>
       <div className='products-container'>
         {
@@ -77,6 +112,3 @@ const Home = ({ setHandleOpening, handleOpening, setVisualFilter, visualFilter }
 }
 
 export default Home
-
-
-// className={`filter__open ${handleOpening && 'filter__close'}`}
